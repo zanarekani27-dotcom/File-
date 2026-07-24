@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Vocabulary — Fitness Words</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(160deg, #eef2ff 0%, #f8fafc 40%, #eafff4 100%);
+    color: #1e293b;
+    min-height: 100vh;
+    padding: 24px 14px 60px;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+
+  header { text-align: center; margin-bottom: 28px; }
+  header h1 {
+    font-size: 1.7rem;
+    margin: 0 0 6px;
+    background: linear-gradient(90deg, #4f46e5, #059669);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header p { color: #64748b; font-size: 0.95rem; margin: 0; }
+
+  .cards { display: grid; gap: 14px; }
+
+  .card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 18px 18px;
+    box-shadow: 0 4px 14px rgba(30, 41, 59, 0.06);
+    border: 1px solid #eef0f5;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(30, 41, 59, 0.1);
+  }
+
+  .card-body { flex: 1; min-width: 0; }
+  .en-word {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .phonetic {
+    font-size: 0.9rem;
+    color: #6366f1;
+    font-weight: 500;
+  }
+  .kurdish {
+    margin-top: 4px;
+    font-size: 1.05rem;
+    color: #059669;
+    font-weight: 600;
+    direction: rtl;
+    text-align: right;
+    display: block;
+  }
+  .translit {
+    margin-top: 2px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    font-style: italic;
+  }
+
+  .audio-btn {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #6366f1, #059669);
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(79, 70, 229, 0.3);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .audio-btn:active { transform: scale(0.92); }
+  .audio-btn.playing {
+    animation: pulse 0.9s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.5); }
+    70% { box-shadow: 0 0 0 12px rgba(99, 102, 241, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+  }
+
+  .controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 22px 0 6px;
+    flex-wrap: wrap;
+  }
+  .controls button {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    color: #334155;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .controls button:hover { background: #f1f5f9; }
+
+  .qr-section {
+    margin-top: 40px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 26px 20px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(30, 41, 59, 0.06);
+    border: 1px solid #eef0f5;
+  }
+  .qr-section h2 {
+    font-size: 1.05rem;
+    margin: 0 0 4px;
+    color: #1e293b;
+  }
+  .qr-section p {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin: 0 0 16px;
+  }
+  #qrcode {
+    display: inline-block;
+    padding: 10px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #eef0f5;
+  }
+  #qrcode img { display: block; border-radius: 6px; }
+
+  footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 0.78rem;
+    color: #94a3b8;
+  }
+
+  .not-supported {
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-bottom: 18px;
+    display: none;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>🏋️ Fitness Vocabulary</h1>
+    <p>English – Kurdish (Sorani) · Tap 🔊 to hear pronunciation</p>
+  </header>
+
+  <div class="not-supported" id="notSupported">
+    ⚠️ Your browser doesn't support speech synthesis. Try Chrome, Edge, or Safari.
+  </div>
+
+  <div class="controls">
+    <button id="playAllBtn">▶️ Play All</button>
+    <button id="slowBtn">🐢 Slow Mode: Off</button>
+  </div>
+
+  <div class="cards" id="cardList"></div>
+
+  <div class="qr-section">
+    <h2>📱 Share this list</h2>
+    <p>Scan the QR code to open this page on another device</p>
+    <div id="qrcode"></div>
+  </div>
+
+  <footer>Made for English learners · Web Speech API powered</footer>
+</div>
+
+<script>
+  const words = [
+    { en: "Cardio", phon: "/ˈkɑːr.di.oʊ/", ku: "کاردیۆ", translit: "kārdiyō (hەڵجووڵاندنی دڵ)" },
+    { en: "Exercise", phon: "/ˈek.sər.saɪz/", ku: "ڕاهێنان", translit: "rāhênān" },
+    { en: "Fitness", phon: "/ˈfɪt.nəs/", ku: "لەشجوانی", translit: "leşcwānî" },
+    { en: "Muscle", phon: "/ˈmʌs.əl/", ku: "ماسولکە", translit: "māsûlke" },
+    { en: "Hydration", phon: "/haɪˈdreɪ.ʃən/", ku: "ئاودان / تێرکردن بە ئاو", translit: "āwdān" },
+    { en: "Recovery", phon: "/rɪˈkʌv.ər.i/", ku: "چاکبوونەوە", translit: "çākbûnewe" }
+  ];
+
+  const cardList = document.getElementById('cardList');
+  const notSupported = document.getElementById('notSupported');
+  let slowMode = false;
+  let currentUtterance = null;
+
+  const synthSupported = 'speechSynthesis' in window;
+  if (!synthSupported) notSupported.style.display = 'block';
+
+  function speak(text, btn) {
+    if (!synthSupported) return;
+    window.speechSynthesis.cancel();
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'en-US';
+    utter.rate = slowMode ? 0.6 : 0.95;
+    utter.pitch = 1;
+
+    document.querySelectorAll('.audio-btn').forEach(b => b.classList.remove('playing'));
+    if (btn) btn.classList.add('playing');
+
+    utter.onend = () => { if (btn) btn.classList.remove('playing'); };
+    utter.onerror = () => { if (btn) btn.classList.remove('playing'); };
+
+    currentUtterance = utter;
+    window.speechSynthesis.speak(utter);
+  }
+
+  words.forEach(word => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <button class="audio-btn" aria-label="Play pronunciation of ${word.en}">🔊</button>
+      <div class="card-body">
+        <div class="en-word">${word.en} <span class="phonetic">${word.phon}</span></div>
+        <span class="kurdish">${word.ku}</span>
+        <div class="translit">${word.translit}</div>
+      </div>
+    `;
+    const btn = card.querySelector('.audio-btn');
+    btn.addEventListener('click', () => speak(word.en, btn));
+    cardList.appendChild(card);
+  });
+
+  document.getElementById('slowBtn').addEventListener('click', function () {
+    slowMode = !slowMode;
+    this.textContent = slowMode ? '🐢 Slow Mode: On' : '🐢 Slow Mode: Off';
+  });
+
+  document.getElementById('playAllBtn').addEventListener('click', async () => {
+    if (!synthSupported) return;
+    const buttons = document.querySelectorAll('.audio-btn');
+    for (let i = 0; i < words.length; i++) {
+      await new Promise(resolve => {
+        const utter = new SpeechSynthesisUtterance(words[i].en);
+        utter.lang = 'en-US';
+        utter.rate = slowMode ? 0.6 : 0.95;
+        buttons[i].classList.add('playing');
+        utter.onend = () => { buttons[i].classList.remove('playing'); resolve(); };
+        utter.onerror = () => { buttons[i].classList.remove('playing'); resolve(); };
+        window.speechSynthesis.speak(utter);
+      });
+      await new Promise(r => setTimeout(r, 250));
+    }
+  });
+
+  // QR code pointing to the current page URL
+  try {
+    new QRCode(document.getElementById('qrcode'), {
+      text: window.location.href,
+      width: 140,
+      height: 140,
+      colorDark: "#1e293b",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  } catch (e) {
+    document.getElementById('qrcode').innerHTML = '<p style="font-size:0.8rem;color:#94a3b8;">QR code unavailable offline</p>';
+  }
+</script>
+</body>
+</html>
